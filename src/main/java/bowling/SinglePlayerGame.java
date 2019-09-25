@@ -8,22 +8,27 @@ package bowling;
 public class SinglePlayerGame {
 
         //score final
-        public int score = 0;
+        public int score;
         //etat du tour ( 0, 1, 2 ou 3)
-        public int touretat = 1;
+        public int touretat;
         //etat du tour précédent (0, 1, 2 ou 3)
-        public int touravant = 0;
+        public int touravant;
         //nb du tour actuel 
-        public int touractuel = 0;
+        public int touractuel;
         //variable du nombre de Quilles tombées lors de la première boule du lancé
-        public int tempQuille = 0;
+        public int tempQuille;
         
         
 	/**
 	 * Constructeur
 	 */
+        
 	public SinglePlayerGame() {
-            
+            score = 0;
+            touretat = 1;
+            touravant = 0;
+            touractuel = 0;
+            tempQuille = 0;
 	}
         
 	/**
@@ -34,14 +39,19 @@ public class SinglePlayerGame {
 	 */
 	public void lancer(int nombreDeQuillesAbattues) {
             //On appelle chaque fonction par rapport à l'état du tour ( [1] 1ere boule du tour, [0] 2eme boule du tour, [2] spare ou [3] strike)
-            if (touretat == 0) {
-                firstetat(nombreDeQuillesAbattues, tempQuille);
-            } else if (touretat == 1) {
-                secondetat(nombreDeQuillesAbattues);
-            } else if (touretat == 2) {
-                thirdetat(nombreDeQuillesAbattues);
-            } else {
-                fourthetat(nombreDeQuillesAbattues);
+            switch(touretat) {
+                case 0:
+                    firstetat(nombreDeQuillesAbattues, tempQuille);
+                    break;
+                case 1:
+                    secondetat(nombreDeQuillesAbattues);
+                    break;
+                case 2:
+                    thirdetat(nombreDeQuillesAbattues);
+                    break;
+                case 3:
+                    fourthetat(nombreDeQuillesAbattues);
+                    break;
             }
         }
         
@@ -136,9 +146,7 @@ public class SinglePlayerGame {
         public void spare() { 
             score += 10;
             touretat = 2;
-        }
-        
-        
+        }        
                 
 	/**
 	 * Cette méthode donne le score du joueur
